@@ -17,7 +17,7 @@ import java.util.*;
 public class DogApiBreedFetcher implements BreedFetcher {
     private final OkHttpClient client = new OkHttpClient();
 
-    String run(String url, String breed) {
+    String run(String url, String breed) throws BreedNotFoundException {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -36,7 +36,7 @@ public class DogApiBreedFetcher implements BreedFetcher {
      * @throws BreedNotFoundException if the breed does not exist (or if the API call fails for any reason)
      */
     @Override
-    public List<String> getSubBreeds(String breed) {
+    public List<String> getSubBreeds(String breed) throws BreedNotFoundException{
         List<String> subBreeds = new ArrayList<>();
         DogApiBreedFetcher breedFetcher = new DogApiBreedFetcher();
         String url = "https://dog.ceo/api/breed/" + breed + "/list";
